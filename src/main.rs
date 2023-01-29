@@ -79,20 +79,19 @@ fn main() {
                         max_time = duration
                     }
                     count_time += duration;
-                    println!("Ping {}/tcp - {} - time= {}ms", addr, str, (duration.as_micros() as f64) / 1000.0);
+                    println!("Ping {}/tcp - {} - time= {:.3}ms", addr, str, (duration.as_micros() as f64) / 1000.0);
                     if count < cli.l.clone() {
                         sleep(Duration::from_secs(cli.w.clone()));
                     }
                 }
                 println!("Ping statistics for {}", addr);
                 println!("\t{} probes sent.", cli.l.clone());
-                println!("\t{} successful, {} failed. ({}% fail)", count - fail, fail, (fail as f64) / (count as f64) * 100.0);
+                println!("\t{} successful, {} failed. ({:.2}% fail)", count - fail, fail, (fail as f64) / (count as f64) * 100.0);
                 println!("Approximate trip times in milli-seconds:");
-                println!("\t Minimum = {}ms, Maximum = {}ms, Average = {}ms",
+                println!("\t Minimum = {:.3}ms, Maximum = {:.3}ms, Average = {:.3}ms",
                          (min_time.as_micros() as f64) / 1000.0,
                          (max_time.as_micros() as f64) / 1000.0,
                          (count_time.as_micros() as f64 / count as f64 / 1000.0));
-                println!("{}", count_time.as_micros());
             }
             Err(err) => {
                 println!("{}", err);
